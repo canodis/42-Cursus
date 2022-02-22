@@ -1,32 +1,15 @@
 NAME = libftprintf.a
-
-SRCS = $(wildcard ft*.c)
-
-OBJS = $(SRCS:.c=.o)
+FLAG = -Wall -Wextra -Werror
+SRC = $(shell find . ! -name "ft_lst*.c" -name "ft_*.c")
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	@ar -rcs $(NAME) $^
-
-%.o: %.c
-	@gcc -Wall -Wextra -Werror -o $@ -c $^
-
+$(NAME):
+	gcc $(FLAG) -c $(SRC)
+	ar rc $(NAME) *.o
 clean:
-	@rm -rf *.o libft/*.o
-
-test: $(NAME)
-	@gcc $^ test.c
-	@./a.out
-	@rm ./a.out
-
+	rm -f  *.o
 fclean: clean
-	@rm -rf $(NAME)
-	@rm -rf libft/$(LIB)
+	rm -f $(NAME)
 
-re: $(NAME) fclean
-	make fclean
-	make
-
-
-.PHONY: re fclean clean all
+re: fclean all
