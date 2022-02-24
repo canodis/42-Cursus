@@ -39,8 +39,6 @@ int	find_after(const char	*type, va_list arg, int *pos)
 		counter = ft_put_hex(va_arg(arg, int), 88);
 	else if (type[*pos] == '%')
 		counter = ft_putchar('%');
-	if (!type[*pos])
-		*pos += 1;
 	return (counter);
 }
 
