@@ -13,6 +13,8 @@
 
 int	ft_notnewline(char *s)
 {
+	if (!s)
+		return (1);
 	while (*s)
 	{
 		if (*s == '\n')
