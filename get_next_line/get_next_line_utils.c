@@ -19,7 +19,7 @@ int	ft_notnewline(char *s)
 	{
 		if (*s == '\n')
 			return (0);
-		s++
+		s++;
 	}
 	return (1);
 }
