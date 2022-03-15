@@ -10,4 +10,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+char *get_next_fkng_line(int fd);
+
 #endif
