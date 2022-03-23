@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnard <tnard@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: rtosun <rtosun@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 14:19:37 by tnard             #+#    #+#             */
-/*   Updated: 2021/11/03 14:23:04 by tnard            ###   ########lyon.fr   */
+/*   Created: 2022/02/02 17:01:21 by rtosun            #+#    #+#             */
+/*   Updated: 2022/02/04 17:37:24 by rtosun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **alst, t_list *new)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	if (!alst || !new)
+	if (!lst || !new)
 		return ;
-	new->next = *alst;
-	*alst = new;
+	new->next = *lst;
+	*lst = new;
 }

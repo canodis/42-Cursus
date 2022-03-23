@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: tnard <tnard@student.42lyon.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/12/09 13:04:45 by tnard             #+#    #+#              #
-#    Updated: 2021/12/14 10:40:11 by tnard            ###   ########lyon.fr    #
-#                                                                              #
-# **************************************************************************** #
-
 SRCS		= so_long.c srcs/ft_read_map.c srcs/ft_split_fs.c srcs/ft_init_map.c \
 srcs/wall_controller.c srcs/ft_init_xpm.c srcs/ft_create_map.c srcs/ft_key_events.c\
 srcs/ft_animator.c

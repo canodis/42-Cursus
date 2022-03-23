@@ -3,25 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnard <tnard@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: rtosun <rtosun@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 10:43:13 by tnard             #+#    #+#             */
-/*   Updated: 2021/11/12 13:24:53 by tnard            ###   ########lyon.fr   */
+/*   Created: 2022/02/20 00:01:28 by rtosun            #+#    #+#             */
+/*   Updated: 2022/02/20 00:21:58 by rtosun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdarg.h>
+# include <stdio.h>
+# include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
+# include <limits.h>
 
-int				ft_printf(const char *str, ...);
-int				ft_putnbr_base(unsigned int nbr, char *base);
-int				ft_putnbr(int n);
-int				ft_putstr(char *s);
-int				ft_putchar(char c);
-int				ft_putmemory(unsigned long long *t, char *table);
-unsigned int	ft_putnbr_u(unsigned int n);
+int		ft_putchar(char c);
+int		ft_printpadress(unsigned long long adress);
+int		ft_putnbr(int n);
+int		ft_print_u_nbr(unsigned int nb);
+int		ft_put_hex(unsigned int nbr, int a);
+int		ft_coputstr(char *str);
+int		ft_strlen(char	*str);
+int		ft_printf(const char *str, ...);
+char	*ft_itoa(int n);
+char	*ft_uitoa(unsigned int n);
 
 #endif

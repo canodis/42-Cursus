@@ -3,56 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnard <tnard@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: rtosun <rtosun@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 10:43:52 by tnard             #+#    #+#             */
-/*   Updated: 2021/12/08 14:36:50 by tnard            ###   ########lyon.fr   */
+/*   Created: 2022/02/16 10:55:51 by rtosun            #+#    #+#             */
+/*   Updated: 2022/02/21 14:02:02 by rtosun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_printf.h"
 
-int	ft_putvalue(const char *str, va_list ap, int i, int t)
+int	ft_putchar(char c)
 {
-	unsigned long long	p;
-
-	if (str[i] == 'p')
-		p = va_arg(ap, unsigned long long);
-	if (str[i] == 'd' || str[i] == 'i')
-		t += ft_putnbr(va_arg(ap, int));
-	else if (str[i] == 's')
-		t += ft_putstr(va_arg(ap, char *));
-	else if (str[i] == 'c')
-		t += ft_putchar(va_arg(ap, int));
-	else if (str[i] == 'p')
-		t += ft_putmemory(&p, "0123456789abcdef");
-	else if (str[i] == 'u')
-		t += ft_putnbr_u(va_arg(ap, unsigned int));
-	else if (str[i] == 'x')
-		t += ft_putnbr_base(va_arg(ap, int), "0123456789abcdef");
-	else if (str[i] == 'X')
-		t += ft_putnbr_base(va_arg(ap, int), "0123456789ABCDEF");
-	else if (str[i] == '%')
-		t += ft_putchar('%');
-	return (t);
+	write(1, &c, 1);
+	return (1);
 }
 
-int	ft_printf(const char *str, ...)
+int	find_after(const char	*type, va_list arg, int *pos)
 {
-	va_list	ap;
-	int		i;
-	int		t;
+	int	counter;
 
-	t = 0;
-	i = -1;
-	va_start(ap, str);
-	while (str[++i])
+	counter = 0;
+	*pos += 1;
+	if (type[*pos] == 'c')
+		counter = ft_putchar(va_arg(arg, int));
+	else if (type[*pos] == 's')
+		counter = ft_coputstr(va_arg(arg, char *));
+	else if (type[*pos] == 'p')
+		counter = ft_printpadress(va_arg(arg, unsigned long long));
+	else if (type[*pos] == 'd' || type[*pos] == 'i')
+		counter = ft_putnbr(va_arg(arg, int));
+	else if (type[*pos] == 'u')
+		counter = ft_print_u_nbr(va_arg(arg, unsigned int));
+	else if (type[*pos] == 'x')
+		counter = ft_put_hex(va_arg(arg, int), 120);
+	else if (type[*pos] == 'X')
+		counter = ft_put_hex(va_arg(arg, int), 88);
+	else if (type[*pos] == '%')
+		counter = ft_putchar('%');
+	return (counter);
+}
+
+int	ft_printf(const char *type, ...)
+{
+	va_list	arg;
+	int		i;
+	int		counter;
+
+	i = 0;
+	counter = 0;
+	va_start(arg, type);
+	while (type[i])
 	{
-		if (str[i] == '%')
-			t += ft_putvalue(str, ap, ++i, 0);
+		if (type[i] != '%')
+			counter += ft_putchar(type[i]);
 		else
-			t += ft_putchar(str[i]);
+			counter += find_after(type, arg, &i);
+		i++;
 	}
-	va_end(ap);
-	return (t);
+	va_end(arg);
+	return (counter);
 }

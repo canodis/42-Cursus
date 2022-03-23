@@ -3,54 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnard <tnard@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: rtosun <rtosun@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 11:09:19 by tnard             #+#    #+#             */
-/*   Updated: 2021/11/04 09:33:08 by tnard            ###   ########lyon.fr   */
+/*   Created: 2022/02/01 16:03:22 by rtosun            #+#    #+#             */
+/*   Updated: 2022/02/06 17:58:37 by rtosun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-size_t	ft_nb_len(int nb)
+static int	ft_numlen(int num)
 {
-	int	len;
+	int	i;
 
-	len = 0;
-	if (nb <= 0)
-		len++;
-	while (nb)
+	if (num == 0)
+		return (1);
+	i = 0;
+	while (num > 0 || num < 0)
 	{
-		len++;
-		nb = nb / 10;
+		num /= 10;
+		i++;
 	}
-	return (len);
+	return (i);
 }
 
 char	*ft_itoa(int n)
 {
 	int		len;
-	char	*str;
-	long	nb;
+	char	*dizi;
+	long	nbr;
 
-	len = ft_nb_len(n);
-	nb = n;
-	str = malloc(sizeof(char) * len + 1);
-	if (!str)
+	nbr = n;
+	len = ft_numlen(nbr);
+	if (n < 0)
+	{
+		len++;
+		nbr = -nbr;
+	}
+	dizi = malloc(sizeof(char) * len + 1);
+	if (!dizi)
 		return (NULL);
-	if (nb < 0)
+	dizi[len] = '\0';
+	while (nbr > 0)
 	{
-		str[0] = '-';
-		nb = -nb;
+		dizi[--len] = nbr % 10 + 48;
+		nbr /= 10;
 	}
-	if (nb == 0)
-		str[0] = '0';
-	str[len--] = '\0';
-	while (nb)
-	{
-		str[len] = nb % 10 + '0';
-		len--;
-		nb = nb / 10;
-	}
-	return (str);
+	if (n < 0)
+		dizi[0] = '-';
+	if (n == 0)
+		dizi[0] = '0';
+	return (dizi);
 }
